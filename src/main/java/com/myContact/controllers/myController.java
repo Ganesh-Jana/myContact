@@ -24,4 +24,19 @@ public class myController {
   public String servicepage() {
     return "service";
   }
+
+  @RequestMapping("/contact")
+  public String contactPage() {
+    return "contact";
+  }
+
+  @RequestMapping("/login")
+  public String loginPage() {
+    return "login";
+  }
+
+  @RequestMapping("/signup")
+  public String signupPage() {
+    return "signup";
+  }
 }
