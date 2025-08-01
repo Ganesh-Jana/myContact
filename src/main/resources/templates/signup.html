@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base :: parent(~{ ::#content}, ~{::title})}">
   <head>
-    <title>Sign up page</title>
+    <title>Sign up</title>
   </head>
   <body>
     <div id="content">
-      <h1>This is Sign up page</h1>
-      <p>
-        Welcome to the about page. Here you can find information about our
-        services.
-      </p>
-      <p>We are committed to providing the best service possible.</p>
+      <!-- sign up from using tailwind css and add image for better UI -->
+      <div class="flex items-center justify-center min-h-screen  bg-gray-100 ">
+        <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md ...">
+          <h2 class="text-2xl font-bold text-center">Sign Up</h2>
+         
+<form data-th-action="@{/doRegister}" method="post" class="max-w-sm mx-auto">
+  <div class="mb-5">
+    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
+    <input type="text" id="username" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="enter here" required />
+  </div>
+  <div class="mb-5">
+    <label for="gmail" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+    <input type="gmail" id="gmail" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="abc@gmail.com" required />
+  </div>
+
+  <div class="mb-5">
+    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+    <input type="password" id="password" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+  </div>
+   <div class="mb-5">
+    <label for="tel" class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
+    <input type="phone" id="phone" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+  </div>
+  
+  <div class="flex items-start mb-5">
+    <div class="flex items-center h-5">
+      <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50" required />
+    </div>
+    <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline ">terms and conditions</a></label>
+  </div>
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
+ </form>
+          <p class="mt-4 text-center text-sm text-gray-600">
+            Already have an account? <a th:href="@{/login}" class="text-blue-600 hover:underline">Log in</a>
+          </p>  
+        </div>
+      
     </div>
   </body>
 </html>
