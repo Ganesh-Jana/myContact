@@ -8,25 +8,68 @@
       <!-- sign up from using tailwind css and add image for better UI -->
       <div class="flex items-center justify-center min-h-screen  bg-gray-100 ">
         <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md ...">
+            <div th:replace="~{message :: message}"></div>
           <h2 class="text-2xl font-bold text-center">Sign Up</h2>
          
-<form data-th-action="@{/doRegister}" method="post" class="max-w-sm mx-auto">
+<form 
+data-th-action="@{/doRegister}" 
+method="post" 
+th:object="${userForm}"
+class="max-w-sm mx-auto"
+novalidate
+>
   <div class="mb-5">
     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-    <input type="text" id="username" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="enter here" required />
+    <input 
+    type="text" 
+    id="username"
+    th:field="*{name}" 
+    class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="enter here" required />
+    <p 
+    th:if="${#fields.hasErrors('name')}" 
+    th:errors="*{name}" 
+    class="text-red-600 px-1 py-1">Name Error</p>
   </div>
+  
   <div class="mb-5">
     <label for="gmail" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-    <input type="gmail" id="gmail" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="abc@gmail.com" required />
+    <input 
+    type="email" 
+    th:field="*{email}"
+    id="email" 
+    class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="abc@gmail.com" required />
+     <p 
+    th:if="${#fields.hasErrors('email')}" 
+    th:errors="*{email}" 
+    class="text-red-600 px-1 py-1">Email Error</p>
   </div>
 
   <div class="mb-5">
-    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-    <input type="password" id="password" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+    <label for="password" 
+    class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+    <input 
+    type="password"  
+    th:field="*{password}"
+     id="password" 
+     class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+      <p 
+    th:if="${#fields.hasErrors('password')}" 
+    th:errors="*{password}" 
+    class="text-red-600 px-1 py-1">password Error</p>
   </div>
    <div class="mb-5">
-    <label for="tel" class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
-    <input type="phone" id="phone" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+    <label for="phone"
+
+    class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
+    <input 
+    type="tel" 
+    id="phone" 
+    th:field="*{phone}"  
+    class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+     <p 
+    th:if="${#fields.hasErrors('phone')}" 
+    th:errors="*{phone}" 
+    class="text-red-600 px-1 py-1">phone number Error</p>
   </div>
   
   <div class="flex items-start mb-5">

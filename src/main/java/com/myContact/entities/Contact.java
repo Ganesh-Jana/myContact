@@ -25,7 +25,7 @@ public class Contact {
   private String contactId;
   private String name;
   private String email;
-  private String phoneNumber;
+  private String phone;
   private String address;
   private String picture;
   @Column(length = 5000)
