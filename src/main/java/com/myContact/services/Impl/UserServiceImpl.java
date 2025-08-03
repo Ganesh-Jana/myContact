@@ -3,8 +3,10 @@ package com.myContact.services.Impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.myContact.services.UserService;
+import com.myContact.Helpers.AppContants;
 import com.myContact.Helpers.ResourceNotFoundException;
 import com.myContact.entities.User;
 import com.myContact.repositories.userRepo;
@@ -17,6 +19,9 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private userRepo userRepository;
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
   private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
   @Override
@@ -25,6 +30,10 @@ public class UserServiceImpl implements UserService {
     if (user.getUserId() == null || user.getUserId().isEmpty()) {
       user.setUserId(UUID.randomUUID().toString());
     }
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+    user.setRoleList(List.of(AppContants.DEFAULT_USER_ROLE));
+
     return userRepository.save(user);
   }
 
