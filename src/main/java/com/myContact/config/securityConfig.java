@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -50,15 +51,27 @@ public class securityConfig {
           auth
               .requestMatchers("/user/**").authenticated()
               .anyRequest().permitAll();
+        })
+        .formLogin(form -> {
+          form
+              .loginPage("/login")
+              .loginProcessingUrl("/authenticate")
+              .defaultSuccessUrl("/user/dashboard", true)
+              .usernameParameter("email")
+              .passwordParameter("password")
+              .permitAll();
+        })
+        .csrf(AbstractHttpConfigurer::disable)
+        .logout(logout -> {
+          logout
+              // .permitAll();
+              .logoutUrl("/logout")
+              .logoutSuccessUrl("/login?logout=true")
+              .logoutUrl("/logout")
+              .invalidateHttpSession(true)
+              .deleteCookies("JSESSIONID");
         });
-    // .formLogin(form -> {
-    // form
-    // .loginPage("/login")
-    // .loginProcessingUrl("/user/login")
-    // .defaultSuccessUrl("/home", true)
-    // .permitAll();
-    // });
-    http.formLogin(Customizer.withDefaults());
+    // http.formLogin(Customizer.withDefaults());
 
     return http.build();
   }
